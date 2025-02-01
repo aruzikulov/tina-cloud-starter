@@ -1,16 +1,20 @@
 {
   "header": {
     "icon": {
-      "name": "Tina",
+      "name": "BiAtom",
       "color": "orange",
       "style": "float"
     },
-    "name": "Tina Starter",
+    "name": "SHOPTIMA",
     "color": "default",
     "nav": [
       {
-        "href": "",
+        "href": "home",
         "label": "Home"
+      },
+      {
+        "href": "price",
+        "label": "Price"
       },
       {
         "href": "about",
@@ -25,12 +29,12 @@
   "footer": {
     "color": "default",
     "social": {
-      "facebook": "",
-      "twitter": "https://x.com/TinaCMS",
-      "instagram": "",
-      "linkedIn": "https://www.linkedin.com/company/tinacms",
-      "github": "https://github.com/tinacms/tinacms",
-      "youtube": "https://www.youtube.com/@TinaCMS"
+      "facebook": "https://www.facebook.com/shoptima/",
+      "twitter": "https://x.com/ShoptimaUz",
+      "instagram": "https://www.instagram.com/shoptima.uz/",
+      "linkedIn": "https://www.linkedin.com/in/shoptima/",
+      "github": "",
+      "youtube": "https://www.youtube.com/@shoptima"
     }
   },
   "theme": {
