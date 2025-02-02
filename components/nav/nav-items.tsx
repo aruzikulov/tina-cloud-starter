@@ -1,6 +1,6 @@
 "use client";
 import { usePathname } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 import NavActive from "./nav-active";
 import { tinaField } from "tinacms/dist/react";
 import Link from "next/link";
@@ -35,33 +35,62 @@ const activeBackgroundClasses = {
 export default function NavItems({ navs }: { navs: any }) {
   const currentPath = usePathname();
   const { theme } = useLayout();
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // State to toggle menu
+
+  // Function to close the menu when clicking outside
+  const closeMenu = () => setIsMenuOpen(false);
+
   return (
-    <ul className="flex gap-6 sm:gap-8 lg:gap-10 tracking-[.002em] -mx-4">
-      {navs.map((item) => {
-        return (
-          <li
-            key={item.href}
-            className={
-              currentPath === `/${item.href}`
-                ? activeItemClasses[theme.color]
-                : ""
-            }
-          >
-            <Link
-              data-tina-field={tinaField(item, "label")}
-              href={`/${item.href}`}
-              className={`relative select-none	text-base inline-block tracking-wide transition duration-150 ease-out hover:opacity-100 py-8 px-4`}
+    <div>
+      {/* Hamburger Menu Button for Mobile */}
+      <button
+        className="sm:hidden block p-4"
+        onClick={() => setIsMenuOpen(!isMenuOpen)}
+      >
+        ☰ {/* Hamburger Icon */}
+      </button>
+
+      {/* Overlay Background */}
+      {isMenuOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50 z-40"
+          onClick={closeMenu}
+        ></div>
+      )}
+
+      {/* Navigation Items */}
+      <ul
+        className={`${
+          isMenuOpen ? "translate-x-0" : "translate-x-full"
+        } fixed top-0 right-0 h-screen w-64 bg-white z-50 flex flex-col gap-6 sm:gap-8 lg:gap-10 tracking-[.002em] -mx-4 transition-transform duration-300 ease-in-out sm:relative sm:flex-row sm:h-auto sm:w-auto sm:bg-transparent sm:translate-x-0`}
+      >
+        {navs.map((item) => {
+          return (
+            <li
+              key={item.href}
+              className={
+                currentPath === `/${item.href}`
+                  ? activeItemClasses[theme.color]
+                  : ""
+              }
             >
-              {item.label}
-              {currentPath === `/${item.href}` && (
-                <NavActive
-                  backgroundColor={activeBackgroundClasses[theme.color]}
-                />
-              )}
-            </Link>
-          </li>
-        );
-      })}
-    </ul>
+              <Link
+                data-tina-field={tinaField(item, "label")}
+                href={`/${item.href}`}
+                className={`relative select-none	text-base inline-block tracking-wide transition duration-150 ease-out hover:opacity-100 py-8 px-4`}
+                onClick={closeMenu} // Close menu when an item is clicked
+              >
+                {item.label}
+                {currentPath === `/${item.href}` && (
+                  <NavActive
+                    backgroundColor={activeBackgroundClasses[theme.color]}
+                  />
+                )}
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 }

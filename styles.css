@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* Example of custom CSS for menu */
+.menu {
+    box-shadow: -4px 0px 6px rgba(0, 0, 0, 0.1); /* Adds a shadow on the left side */
+  }
+  
+  .overlay {
+    backdrop-filter: blur(4px); /* Adds a blur effect to the overlay */
+  }
